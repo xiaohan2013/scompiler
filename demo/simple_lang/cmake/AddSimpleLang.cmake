@@ -12,7 +12,7 @@ macro(add_simplelang_library name)
     llvm_add_library(${name} ${LIBTYPE} ${ARGN})
     if(TARGET ${name})
         target_link_libraries(${name} INTERFACE ${LLVM_COMMON_LIBS})
-        install(TARGET ${name}
+        install(TARGETS ${name}
             COMPONENT ${name}
             LIBRARY DESTINATION lib${LLVM_LIBDIR_SUFFIX}
             ARCHIVE DESTINATION lib${LLVM_LIBDIR_SUFFIX}
