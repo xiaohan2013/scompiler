@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.8)
 
-project("SimpleLexer")
+project("SimpleCompiler")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMKAE_C_COMPILER /usr/bin/clang)
-set(CMAKE_CXX_COMPILER /usr/bin/clang-cpp)
+set(CMAKE_CXX_COMPILER /usr/bin/clang++)
 set(LLVM_INSTALL_PREFIX "/usr/lib/llvm-17")
 
 

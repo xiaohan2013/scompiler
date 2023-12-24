@@ -3,7 +3,7 @@
 #ifndef LEXER_H
 #define LEXER_H
 
-#incldue "llvm/ADT/StringRef.h"
+#include "llvm/ADT/StringRef.h"
 #include "llvm/Support/MemoryBuffer.h"
 
 class Token {

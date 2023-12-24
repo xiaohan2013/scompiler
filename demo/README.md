@@ -4,6 +4,7 @@
 ## lexer
 ```sh
 cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug ..
+cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..
 
 
 cmake --build .
@@ -18,5 +19,13 @@ cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug ..
 sudo apt install -y libzstd-dev
 sudo apt-get install -y libedit-dev
 sudo apt-get install -y libcurl4-openssl-dev
+
+
+clang-format-17 -i src/*.cpp src/*.h
 ```
 
+## Compiler
+```sh
+./simple_compiler "with abc,xyz: (abc+xyz)*3 - 10/abc"
+
+```
