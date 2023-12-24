@@ -23,7 +23,7 @@ class Token {
             kRightParen,
             kKeywordWith
         };
-    private:
+    public:
         TokenType GetType() const
         {
             return type;

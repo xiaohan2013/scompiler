@@ -8,7 +8,7 @@ static llvm::cl::opt<std::string> input(llvm::cl::Positional,
         llvm::cl::desc("<input expression>"),
         llvm::cl::init(""));
 
-int main(int args, const char** arvg) {
+int main(int argc, const char** argv) {
     llmv::InitLLVM llvmInitializer(argc, argv);
     llvm::cl::ParseCommandLineOptions(argc, argv, "simplelexer - a simple lexical analyzer\n");
     llvm::outs() << "Input: \"" << input << "\"\n";

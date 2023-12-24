@@ -87,6 +87,6 @@ void Lexer::GetNext(Token& token) {
 
 void Lexer::InitializeToken(Token& token, const char* tokenEnd, Token::TokenType type) {
     token.SetType(type);
-    token.setText(llvm::StringRef(bufferPtr, tokenEnd - bufferPtr));
+    token.SetText(llvm::StringRef(bufferPtr, tokenEnd - bufferPtr));
     bufferPtr = tokenEnd;
 }
