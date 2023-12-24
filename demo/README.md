@@ -66,3 +66,10 @@ clang -S -emit-llvm ../llvm/lib/Transforms/SimpleModulePass/Test.c -o ../llvm/li
 
 ./bin/opt -load-pass-plugin=lib/MyPass.dylib -passes="my-pass" -disable-output test.ll
 ```
+
+
+## JIT
+```sh
+clang++ -w -o HelloJIT `llvm-config-17 --cxxflags --ldflags --system-libs --libs all` HelloJIT.cpp
+
+```
