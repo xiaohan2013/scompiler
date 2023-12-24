@@ -1,0 +1,7 @@
+add_subdirectory(MyPass)
+add_subdirectory(SimpleModulePass)
+add_subdirectory(SimpleFunctionPass)
+add_subdirectory(SimpleLoopPass)
+add_subdirectory(CompileTimeFunctionCallCounter)
+add_subdirectory(RunTimeFunctionCallCounter)
+add_subdirectory(ConstantAdditionCombiner)
