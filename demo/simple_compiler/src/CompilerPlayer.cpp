@@ -1,4 +1,7 @@
 #include "Parser.h"
+#include "SemanticAnalyzer.h"
+#include "IRGenerator.h"
+
 
 #include "llvm/Support/CommandLine.h"
 #include "llvm/Support/InitLLVM.h"
@@ -38,8 +41,8 @@ namespace {
 
             llvm::outs() << "\n";
 
-            if(Node.getExpr()) {
-                Node.getExpr()->Accept(*this);
+            if(Node.GetExpr()) {
+                Node.GetExpr()->Accept(*this);
             }
         };
     };
@@ -63,6 +66,18 @@ int main(int argc, const char** argv) {
         return 1;
     }
 
+    SemanticAnalyzer semanticAnalyzer;
+    if(semanticAnalyzer.Analysis(tree)) {
+        llvm::errs() << "Semantic errors occured\n";
+        return 1;
+    }
+
+    llvm::outs() << " Generate IR : \n\n";
+    IRGenerator irGenerator;
+    irGenerator.Generate(tree);
+
+    llvm::outs() << " Semantic check passed\n\n";
+    
     ASTPrinter printer;
     tree->Accept(printer);
 

@@ -24,9 +24,9 @@ public:
     {
     }
 
-    virtual void Visit(Factor&) = 0;
-    virtual void Visit(BinaryOp&) = 0;
-    virtual void Visit(WithDeclaration&) = 0;
+    virtual void Visit(Factor&) {};
+    virtual void Visit(BinaryOp&) {};
+    virtual void Visit(WithDeclaration&) {};
 };
 
 class AST
@@ -181,7 +181,7 @@ public:
         return variables.end();
     }
 
-    Expr* getExpr()
+    Expr* GetExpr()
     {
         return expr;
     }
