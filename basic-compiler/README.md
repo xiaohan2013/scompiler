@@ -4,7 +4,7 @@
 cmake .. -B build
 cmake --build build
 cmake -DCMAKE_BUILD_TYPE=Debug -S . -B build --trace-source=CMakeLists.txt && cd build && make
-cmake -D CMAKE_BUILD_TYPE=Debug -S . -B build --trace-source=CMakeLists.txt && cd build && make 
+rm -rf build && cmake -D CMAKE_BUILD_TYPE=Debug -S . -B build --trace-source=CMakeLists.txt && cd build && make && cd ../ && ./build/NFA2DFA/nfa_2_dfa.exe 
 # Generator = Ninja
 
 

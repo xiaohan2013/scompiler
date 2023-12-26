@@ -21,7 +21,7 @@ typedef struct _NFAFragment {
 }NFAFragment;
 
 // 声明函数
-NFAState* CreateNFAState();
+NFAState* create_nfa_state();
 NFAState* post2nfa(char* postfix);
 NFAFragment MakeNFAFragment(
     NFAState* start_state,
