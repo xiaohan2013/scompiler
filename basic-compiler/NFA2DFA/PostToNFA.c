@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "PostToNFA.h"
 #include "NFAFragmentStack.h"
@@ -20,17 +21,18 @@ NFAState* create_nfa_state()
     return s;
 }
 
-NAFFragment make_nfa_fragment(NFAState *start_state, NFAState *accept_state)
+NFAFragment make_nfa_fragment(NFAState *start_state, NFAState *accept_state)
 {
-    return {start_state, accept_state};
+    NFAFragment n = {start_state, accept_state};
+    return n;
 }
 
 
-NFAState* post2nfa(char *postfix)
+NFAState* post_to_nfa(char *postfix)
 {
     char *p;
-    NAFFragment *f1, *f2, fm;
-    NAFFragment f = {0, 0};
+    NFAFragment *f1, *f2, fm;
+    NFAFragment f = {0, 0};
     NFAState *new_start_state, *new_accept_state;
     p = postfix;
 
@@ -39,15 +41,22 @@ NFAState* post2nfa(char *postfix)
         char ch = *p;
         switch (ch)
         {
-        case /* constant-expression */:
+        case '|':
             /* code */
             break;
-        
+        case '&':
+            break;
+        case '*':
+            break;
+        case '?':
+            break;
+        case '+':
+            break;
         default:
             break;
         }
         ++p;
     }
 
-    return f;
+    return f.start_state;
 }

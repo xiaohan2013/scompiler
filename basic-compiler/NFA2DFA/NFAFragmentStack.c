@@ -1,4 +1,4 @@
-#include "NFA2DFA.h"
+#include "NFAToDFA.h"
 #include "NFAFragmentStack.h"
 
 void init_nfa_fragment_stack(NFAFragmentStack *ps)
@@ -6,7 +6,7 @@ void init_nfa_fragment_stack(NFAFragmentStack *ps)
     ps->top = -1;
 }
 
-void push_nfa_fragment(NFAFragmentStack *ps, NFAFragment *elem)
+void push_nfa_fragment(NFAFragmentStack *ps, NFAFragment elem)
 {
     if(MAX_STACK_LENGTH - 1 <= ps->top)
         return;
@@ -17,18 +17,18 @@ void push_nfa_fragment(NFAFragmentStack *ps, NFAFragment *elem)
     return;
 }
 
-NFAFragment* pop_nfa_fragment(NFAFragmentStack *ps)
+NFAFragment pop_nfa_fragment(NFAFragmentStack *ps)
 {
     int pos;
-    NFAFragment *state = 0;
+    NFAFragment fragment = {0, 0};
 
     if(nfa_fragment_stack_empty(ps))
-        return state;
+        return fragment;
 
     pos = ps->top;
     ps->top--;
 
-    return ps->buffer[top];
+    return ps->buffer[ps->top];
 }
 
 int nfa_fragment_stack_empty(NFAFragmentStack *ps)

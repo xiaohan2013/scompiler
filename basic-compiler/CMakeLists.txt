@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.13.4)
 
 project(compiler)
 
+set(CMAKE_TAPI "@CMAKE_TAPI@")
 set(CMAKE_C_STANDARD 99)
 # set(CMAKE_MAKE_PROGRAM )
 set(CMAKE_C_COMPILER /clang64/bin/gcc)

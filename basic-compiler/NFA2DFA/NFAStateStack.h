@@ -1,7 +1,7 @@
 #ifndef __NFASTATESTACK_H__
 #define __NFASTATESTACK_H__
 
-#include "NFA2DFA.h"
+#include "NFAToDFA.h"
 
 
 #define MAX_STACK_LENGTH 1024

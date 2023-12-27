@@ -10,7 +10,7 @@
 typedef struct _NFAState
 {
     /* data */
-    char tansform;
+    char transform;
     struct _NFAState *next1;
     struct _NFAState *next2;
     int name;
@@ -22,7 +22,7 @@ typedef struct _NFAFragment
     /* data */
     NFAState *start_state;
     NFAState *accept_state;
-}NAFFragment;
+}NFAFragment;
 
 // 转换
 typedef struct _Transform
@@ -51,7 +51,7 @@ typedef struct DFA {
 
 // 处理函数
 // 
-void epsilon_closure(NFAState *state, NFAState *state_array, int *count);
+void epsilon_closure(NFAState *state, NFAState **state_array, int *count);
 DFAState* create_dfa_state(Transform *pTransform);
 Transform* create_dfa_transform(char transform_char, NFAState **nfa_state_array, int count);
 Transform* is_transform_exist(DFAState* dfa_state, char transform_char);
@@ -62,4 +62,4 @@ DFA* post2dfa(DFA *dfs_ptr, char *postfix);
 extern const char VoidTrans;
 extern NFAState *start;
 
-#endif __NFATODFA_H__
+#endif // __NFATODFA_H__

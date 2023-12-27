@@ -1,4 +1,4 @@
-#include "NFA2DFA.h"
+#include "NFAToDFA.h"
 #include "NFAStateStack.h"
 
 void init_nfa_state_stack(NFAStateStack *ps)
@@ -28,7 +28,7 @@ NFAState* pop_nfa_state(NFAStateStack *ps)
     pos = ps->top;
     ps->top--;
 
-    return ps->buffer[top];
+    return ps->buffer[ps->top];
 }
 
 int nfa_state_stack_empty(NFAStateStack *ps)
