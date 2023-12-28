@@ -20,7 +20,7 @@
 //    5. If the input symbol is an ), pop all opeartors from the operator stack and append them to the output queue until you find an (. Then
 //       you can remove both of those parenthesises and continue with the algorithm.
 // Precedence from highest to lowest
-// 1. Closure(Kleen star) a*
+// 1. Closure(Kleen star) a* ? +, left-associative
 // 2. Concatenation ab -> a.b
 // 3. Union a+b(a|b)
 char* re2post(char* re)
@@ -78,20 +78,21 @@ char* re2post(char* re)
         case '*':
         case '+':
         case '?':
+            // 优先级最高，但是在 left-parenthesis 在栈顶时还是继续入栈
             if(*stack_top_ptr == '(')
             {
                 ++stack_top_ptr;
                 *stack_top_ptr = ch;
             }
 
-            while(*stack_top_ptr != '#')
-            {
-                *ptr_postfix = *stack_top_ptr;
-                *stack_top_ptr = '\0';
-                --stack_top_ptr;
-                ++ptr_postfix;
-                *ptr_postfix = '\0';
-            }
+            // while(*stack_top_ptr != '#')
+            // {
+            //     *ptr_postfix = *stack_top_ptr;
+            //     *stack_top_ptr = '\0';
+            //     --stack_top_ptr;
+            //     ++ptr_postfix;
+            //     *ptr_postfix = '\0';
+            // }
             *ptr_postfix = ch;
             ptr_postfix++;
             *ptr_postfix = '\0';

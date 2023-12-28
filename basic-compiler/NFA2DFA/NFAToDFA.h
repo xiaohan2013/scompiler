@@ -30,7 +30,7 @@ typedef struct _Transform
     /* data */
     char transform_char;
     int dfa_state_index;
-    NFAState *nfa_list[MAX_STATE_NUM];
+    NFAState *nfa_state_list[MAX_STATE_NUM];
     int nfa_state_count;
     struct _Transform *next_transform;
 }Transform;
@@ -45,7 +45,7 @@ typedef struct _DFAState
 
 // DFA
 typedef struct DFA {
-    DFAState *dfa_list[MAX_STATE_NUM];
+    DFAState *dfa_state_list[MAX_STATE_NUM];
     int length; //状态集合计数
 }DFA;
 

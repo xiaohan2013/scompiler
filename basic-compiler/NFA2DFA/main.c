@@ -15,8 +15,6 @@ int main(int argc, char** argv)
     post = re2post(regexp);
     printf("regular expression: %s;\n postfix sequences: %s \n", regexp, post);
 
-    
-
     return 0;
 }
 
@@ -79,7 +77,6 @@ void add_nfa_state_array_to_transform(NFAState **nfa_state_array, int count, Tra
 void epsilon_closure(NFAState *state, NFAState **state_array, int *count)
 {
     // init_nfa_state_stack(&state_stack);
-
     // TODO
     return;
 }
