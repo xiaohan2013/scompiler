@@ -1,6 +1,8 @@
 %option noyywrap
+%option yylineno
 %{
 #include <stdio.h>
+#include <ctype.h>
 #include "define.h"
 
 int lineno = 0;
@@ -38,6 +40,11 @@ int comment_no = 0;
 %x STATE_X
 newline  \n
 whitespace [\t]+
+digit [0-9]+
+letter  [a-zA-Z]
+id  ({letter}|_)({letter}|{digit}|_)*
+
+
 
 %%
         /* Rules Section */
@@ -60,9 +67,10 @@ ruleA   /* after regex */ { /* code block */ } /* after code block */
 "(" {return LPAREN;}
 ")" {return RPAREN;}
 ";" {return SEMI;}
-
+{id} {return ID;}
 {newline} {lineno++;}
 {whitespace} {/*忽略空白*/}
+{digit} {return NUM;}
 
 "{" {
         // 匹配注释
@@ -73,8 +81,7 @@ ruleA   /* after regex */ { /* code block */ } /* after code block */
             if(c == EOF){
                 comment=0;
                 break;
-            }
-            else if (c == '\n') {
+            } else if (c == '\n') {
                 lineno++;
             } else if (c == '}') {
                 break;
@@ -142,16 +149,29 @@ static const KeyWord_Entry key_table[] = {
     {"write", WRITE}
 };
 
+void toLower(char *str) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        str[i] = tolower(str[i]);
+    }
+}
+
 // 将标识符转化为对应关键字类型
 TokenType id2keyword(const char *id)
 {
-    //
-
+    // toLower(id);
+    printf("id = %s \n", id);
+    int row_size = sizeof(key_table)/sizeof(key_table[0]);
+    for(int i = 0 ; i < row_size; i++) {
+        if(strcmp(id, key_table[i].word) == 0){
+            return key_table[i].type;
+        }
+    }
     return ID;
 }
 
 void stat(TokenType tt, const char *token)
 {
+    printf("tt = %u, token=%s \n", tt, token);
     if(ID == tt)
     {
         tt = id2keyword(token);

@@ -8,6 +8,7 @@ rm -rf main.c && flex -d -v -f -o main.c main.lex
 gcc -ansi -Wall -E -c -g main.c -o main.exe
 
 gcc -g -Wall main.c -o main
+./main.exe sample.txt
 
 # 打印系统中已经登记的库
 ldconfig -p
