@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef __ELIMINATE_LEFT_RECURSION_H__
 #define __ELIMINATE_LEFT_RECURSION_H__
 
