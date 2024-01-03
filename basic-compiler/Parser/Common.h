@@ -2,27 +2,38 @@
 #define __COMMON_H__
 
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #define MAX_STR_LENGTH 64
-
 
 typedef struct __SYMBOL
 {
     int isToken;
-    char SymbolName[MAX_STR_LENGTH];
+    char Name[MAX_STR_LENGTH];
 }SYMBOL;
 
 typedef struct __RULE_ENTRY
 {
-    char RuleName[MAX_STR_LENGTH]; // 
-    SYMBOL symbols[64];
+    char RuleName[MAX_STR_LENGTH]; //  一条产生式规则
+    SYMBOL Selects[64][64]; // SYMBOL 的数组
 }RULE_ENTRY;
 
+static const RULE_ENTRY rule_table[] = {
+    // A -> Aa | bA | c | Ad 
+    {"A",{
+            {{0, "A"}, {1, "a"}},
+            {{1, "b"}, {0, "A"}},
+            {{1, "c"}},
+            {{0, "A"}, {1, "d"}}
+        }
+    }
+};
 
 struct __RULE;
 typedef struct __RuleSymbol {
     struct __RuleSymbol *pNextSymbol; // 执行下一个 Symbol
-    struct __RuleSymbol *pOhter; // 指向下一个 select 
+    struct __RuleSymbol *pOther; // 指向下一个 select 
     int isToken; 
     char TokenName[MAX_STR_LENGTH];
     struct __Rule *pRule;
@@ -46,9 +57,10 @@ typedef struct __SetList {
     int nSetCnt; // 数组元素个数
 }SetList;
 
+
 Rule* init_rules(void);
 Rule* create_rule(const char *pRuleName);
-RuleSymbol* create_symbol(void);
+RuleSymbol* create_rule_symbol(void);
 Rule* find_rule(Rule *pHead, const char *rule_name);
 void print_rule(Rule *pHead);
 
