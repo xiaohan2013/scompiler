@@ -110,6 +110,91 @@ void eliminate_left_recursion(Rule *pHead)
 }
 
 
+int symbol_need_replace(const Rule *pCurrentRule, const RuleSymbol *pSymbol)
+{
+    // 判断当前 Rule 中的一个 Symbol 是否需要被替换。如果Symbol是一个非终结符，且Symbol对应的Rule在当前Rule之前，就需要被替换
+    if(pSymbol->isToken == 0 && pSymbol->pRule == pCurrentRule)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+RuleSymbol* copy_symbol(const RuleSymbol *pSymbolTemplate)
+{
+    RuleSymbol *pNewSymbol = (RuleSymbol*)malloc(sizeof(RuleSymbol));
+
+    pNewSymbol->isToken = pSymbolTemplate->isToken;
+    strcpy(pNewSymbol->TokenName, pSymbolTemplate->TokenName);
+    pNewSymbol->pNextSymbol = pSymbolTemplate->pNextSymbol;
+    pNewSymbol->pOther = pSymbolTemplate->pOther;
+    pNewSymbol->pRule = pSymbolTemplate->pRule;
+
+    return pNewSymbol;
+}
+
+// 复制一个 Select
+RuleSymbol* copy_select(const RuleSymbol *pSelectTemplate)
+{
+    // 
+    RuleSymbol *p = pSelectTemplate;
+    RuleSymbol *pp = NULL;
+    while (p->pNextSymbol != NULL)
+    {
+        if(pp == NULL)
+        {
+            pp = copy_symbol(p);
+        }
+        else
+        {
+            pp->pNextSymbol = copy_symbol(p);
+        }
+        p = p->pNextSymbol;
+    }
+    return pp;
+}
+
+// 替换一个select的第一个Symbol
+// 
+RuleSymbol* repalce_select(const RuleSymbol *pSelectTempalte)
+{
+    if(pSelectTempalte->pNextSymbol == NULL) return;
+    return pSelectTempalte->pNextSymbol;
+}
+
+// 释放一个 Select 内存
+void free_select(RuleSymbol *pSelect)
+{
+    if(pSelect == NULL) return;
+
+    RuleSymbol *p = pSelect;
+    while (pSelect != NULL)
+    {
+        p = pSelect;
+        pSelect = pSelect->pNextSymbol;
+        free(p);
+    }
+}
+
+// 判断一条 Rule 是否存在左递归
+// 存在返回 1
+// 不存在返回 0
+int rule_has_left_recursion(Rule *pRule)
+{
+    Rule *pHead = pRule;
+    RuleSymbol *pHeadRuleSymbol = pHead->pFirstSymbol;
+    RuleSymbol *p = pHeadRuleSymbol;
+    while (p != NULL)
+    {
+        if(symbol_need_replace(pHead, p) == 1)
+        {
+            return 1;
+        }
+        p = p->pOther;
+    }
+    return 0;
+}
+
 int main(int argc, char* argv[])
 {
     // 初始化文法

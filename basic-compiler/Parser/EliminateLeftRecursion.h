@@ -23,5 +23,11 @@ void add_select_to_rule(Rule *pRule,RuleSymbol *pNewSelect);
 */
 void eliminate_left_recursion(Rule *pHead);
 
+int symbol_need_replace(const Rule *pCurrentRule, const RuleSymbol * pSymbol);
+RuleSymbol* copy_symbol(Rule *pRule, RuleSymbol *pSymbolTemplate);
+RuleSymbol* copy_select(const RuleSymbol *pSelectTemplate);
+void free_select(RuleSymbol *pSelect);
+RuleSymbol* repalce_select(const RuleSymbol *pSelectTemplate);
+int rule_has_left_recursion(Rule *pRule);
 
 #endif /* __ELIMINATE_LEFT_RECURSION_H__ */
